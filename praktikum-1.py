@@ -1,64 +1,71 @@
-mahasisiwa=[]
-def tampilkan_data():
-    if len (mahasisiwa)==0:
-        print("\ndata kosong!")
-    else:
-        print("\nDaftar Mahasisiwa!")
-        for i, mhs in enumerate(mahasisiwa, start=1):
-            print(f"{i}.Nama: {mhs ['nama']}, Nilai:{mhs['nilai']}")
+# Inisialisasi list mahasiswa untuk menampung data dictionary
+mahasiswa = []
 
-def tambaha_data():
-    namam = input ("masukkan nama mahasiiswa:")
-    nilai = int (input ("masukkan nilai mahasiiswa:"))
+def tampilkan_data():
+    if len(mahasiswa) == 0:
+        print("\nData masih kosong!")
+    else:
+        print("\nDaftar Mahasiswa:")
+        # Menggunakan enumerate dengan start=1 untuk penomoran
+        for i, mhs in enumerate(mahasiswa, start=1):
+            print(f"{i}. Nama: {mhs['nama']}, Nilai: {mhs['nilai']}")
+
+def tambah_data():
+    nama = input("Masukkan nama mahasiswa: ")
+    nilai = int(input("Masukkan nilai mahasiswa: "))
     data = {
-        "nama" : nama,
+        "nama": nama,
         "nilai": nilai
     }
-    mahasisiwa.append(data)
-    print("Data berhasil ditambhakan!")
+    mahasiswa.append(data)
+    print("Data berhasil ditambahkan!")
+
 def hapus_data():
     tampilkan_data()
-    if len (mahasisiwa) > 0:
-        index = int (input("pilih nomor yang akan dihapus:"))-1
-
+    if len(mahasiswa) > 0:
+        index = int(input("Pilih nomor yang akan dihapus: ")) - 1
+        
         if 0 <= index < len(mahasiswa):
-            mahaisiwa.pop(index)
+            mahasiswa.pop(index)
             print("Data berhasil dihapus!")
         else:
-            print("index tidak valid!")
-def cari_mahasisiwa():
-    keyword = input ("masukkan nama yang akan dicari: ").lowwr()
-    ditemukan= False
+            print("Index tidak valid!")
 
-    for mhs in mahasisiwa:
-        if keyword in mhs["nama"].lower():
-            print(f"Nama: {mhs['nama']}, Nilai: {mhs['nilai']}")
+def cari_mahasiswa():
+    keyword = input("Masukkan nama yang dicari: ").lower()
+    ditemukan = False
+    
+    for mhs in mahasiswa:
+        if keyword in mhs['nama'].lower():
+            print(f"Ditemukan: {mhs['nama']} dengan nilai {mhs['nilai']}")
             ditemukan = True
+            
     if not ditemukan:
         print("Data tidak ditemukan!")
 
-def rata_rata():
-    if len (mahasiswa)== 0:
-        print ("belum ada data.")
+def rata_rata_nilai():
+    if len(mahasiswa) == 0:
+        print("Belum ada data.")
     else:
         total = 0
-        for mhs in mahasisiwa:
-            total += mhs ['nilai']
+        for mhs in mahasiswa:
+            total += mhs['nilai']
+        
+        rata = total / len(mahasiswa)
+        print(f"Rata-rata nilai: {rata:.2f}")
 
-        rata = total / len (mahasisiwa)
-        print (f"rata-rata nilai: {rata:.2f}")
-
-#
-while True: 
-    print ("\n=== Menu ===")
-    print ("1. Tampilkan Data")
-    print ("2. Tambah Data")
-    print ("3. Hapus Data")
-    print ("4. Cari Mahasiswa")
-    print ("5. Rata-rata Nilai")
-    print ("6. Keluar")
-
-    pilihan = input ("pilih menu (1-6):")
+# --- Program Utama (While Loop) ---
+while True:
+    print("\n=== MENU ===")
+    print("1. Tampilkan Data")
+    print("2. Tambah Data")
+    print("3. Hapus Data")
+    print("4. Cari Mahasiswa")
+    print("5. Hitung Rata-rata Nilai")
+    print("6. Keluar")
+    
+    pilihan = input("Pilih menu (1-6): ")
+    
     if pilihan == "1":
         tampilkan_data()
     elif pilihan == "2":
@@ -66,11 +73,11 @@ while True:
     elif pilihan == "3":
         hapus_data()
     elif pilihan == "4":
-        cari_mahasisiwa()
+        cari_mahasiswa()
     elif pilihan == "5":
-        rata_rata()
+        rata_rata_nilai()
     elif pilihan == "6":
-        print("Terima kasih!")
+        print("Program selesai.")
         break
     else:
-        print("pilihan tidak valid!")
+        print("Pilihan tidak valid!")
